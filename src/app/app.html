@@ -1,0 +1,42 @@
+<header>
+  <h1>Выдающиеся поэты России</h1>
+  <p>Интерактивная галерея великих творцов русского слова</p>
+</header>
+
+<div class="container">
+  <!-- Поиск -->
+  <div class="search-box">
+    <input
+      [(ngModel)]="searchTerm"
+      type="text"
+      placeholder="Введите фамилию поэта..."
+    />
+  </div>
+
+  <!-- Галерея -->
+  <div class="gallery">
+    <div
+      class="card"
+      *ngFor="let poet of filteredPoets"
+      (click)="selectPoet(poet)"
+    >
+      <img [src]="poet.photo" alt="{{ poet.fullname }}" />
+      <div class="card-body">
+        <h5 class="card-title">{{ poet.fullname }}</h5>
+        <p class="card-text">{{ poet.description | slice: 0:120 }}...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно -->
+  <div *ngIf="selectedPoet" class="modal-overlay" (click)="closeDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedPoet.photo" alt="{{ selectedPoet.fullname }}" />
+      <h2>{{ selectedPoet.fullname }}</h2>
+      <p>{{ selectedPoet.description }}</p>
+      <div class="text-center mt-3">
+        <button class="close-btn" (click)="closeDetails()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

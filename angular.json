@@ -1,0 +1,118 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "RussianConstructors": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "RussianConstructors:build:production"
+            },
+            "development": {
+              "buildTarget": "RussianConstructors:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+,
+"cli": {
+  "analytics": "7349cc21-1f91-4e2f-9a41-0d2507747703"
+},
+"cli": {
+  "analytics": "c3c87988-a032-4a4d-a958-e2de9b7d972d"
+},
+"cli": {
+  "analytics": "6813c88f-4061-479e-a803-b3c6599fbee2"
+},
+"cli": {
+  "analytics": "8dfb9b6e-2e0b-4dcb-9f73-8d634383e2fe"
+},
+"cli": {
+  "analytics": "c57f0201-8e83-43b2-a993-5fdbecb86e45"
+},
+"cli": {
+  "analytics": "f4171425-59bf-42e7-ad8d-1d6ebef4ae7c"
+},
+"cli": {
+  "analytics": "14bec5ff-d52c-46bd-a7cd-6fa08f327bb3"
+},
+"cli": {
+  "analytics": "0fc5b397-e37d-4afe-9663-cb46db04e5a5"
+},
+"cli": {
+  "analytics": false
+},
+"cli": {
+  "analytics": "dd8ed22f-bf36-4e32-97f6-11f0a3e00d9e"
+},
+"cli": {
+  "analytics": "e07bc683-1aee-40b7-857a-28c7a6f5d748"
+},
+"cli": {
+  "analytics": "47e64af7-494e-4955-a998-36b370bbab17"
+}

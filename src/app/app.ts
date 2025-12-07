@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Model, Poet } from './model';
+import { Model, Cosmonaut } from './model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,20 +13,20 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   model = new Model();
   searchTerm: string = '';
-  selectedPoet: Poet | null = null;
+  selectedCosmonaut: Cosmonaut | null = null;
 
-  get filteredPoets(): Poet[] {
+  get filteredCosmonauts(): Cosmonaut[] {
     const term = this.searchTerm.toLowerCase();
-    return this.model.poets.filter(p =>
+    return this.model.cosmonauts.filter(p =>
       p.fullname.toLowerCase().includes(term)
     );
   }
 
-  selectPoet(poet: Poet) {
-    this.selectedPoet = poet;
+  selectCosmonaut(cosmonaut: Cosmonaut) {
+    this.selectedCosmonaut = cosmonaut;
   }
 
   closeDetails() {
-    this.selectedPoet = null;
+    this.selectedCosmonaut = null;
   }
 }

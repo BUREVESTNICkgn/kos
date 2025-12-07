@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#581c0c"/>
+      <stop offset="100%" stop-color="#7f2d1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <text x="50%" y="50%" fill="#ffe8cc" font-size="60" font-family="Arial, sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="middle">Джанибеков</text>
+  <text x="50%" y="310" fill="#ffd8a8" font-size="22" font-family="Arial, sans-serif" text-anchor="middle">Владимир Джанибеков</text>
+</svg>

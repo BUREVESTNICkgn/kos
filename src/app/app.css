@@ -1,19 +1,21 @@
 /* === Общие стили === */
 body {
-  background: linear-gradient(180deg, #f9fafb 0%, #e5e7eb 100%);
+  background: radial-gradient(circle at 20% 20%, rgba(72, 149, 239, 0.12), transparent 25%),
+    radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.16), transparent 30%),
+    linear-gradient(180deg, #0b1020 0%, #0f172a 50%, #0b1220 100%);
   font-family: "Merriweather", "Georgia", serif;
-  color: #1f2937;
+  color: #e5e7eb;
   margin: 0;
   padding: 0;
 }
 
 /* === Шапка === */
 header {
-  background: #111827;
-  color: #f9fafb;
+  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+  color: #fdf4ff;
   text-align: center;
-  padding: 30px 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 34px 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
@@ -24,7 +26,7 @@ header h1 {
 }
 
 header p {
-  color: #9ca3af;
+  color: #e0e7ff;
   font-size: 1rem;
   margin-top: 8px;
 }
@@ -46,16 +48,42 @@ header p {
 .search-box input {
   width: 400px;
   border-radius: 25px;
-  border: 2px solid #d1d5db;
+  border: 2px solid rgba(14, 165, 233, 0.45);
   padding: 10px 20px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  background-color: rgba(15, 23, 42, 0.6);
+  color: #f8fafc;
 }
 
 .search-box input:focus {
   outline: none;
-  border-color: #374151;
-  box-shadow: 0 0 6px rgba(55, 65, 81, 0.3);
+  border-color: #7c3aed;
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.45);
+}
+
+.tip-box {
+  margin: 0 auto 36px;
+  max-width: 900px;
+  background: rgba(14, 116, 144, 0.14);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  border-radius: 16px;
+  padding: 18px 22px;
+  color: #e0f2fe;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.tip-box strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #f8fafc;
+}
+
+.tip-box code {
+  background: rgba(15, 23, 42, 0.7);
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #c7d2fe;
 }
 
 /* === Галерея === */
@@ -67,17 +95,17 @@ header p {
 
 /* === Карточка === */
 .card {
-  background: #ffffff;
+  background: linear-gradient(145deg, rgba(30, 64, 175, 0.25), rgba(14, 116, 144, 0.25));
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.55);
 }
 
 /* === Фото === */
@@ -85,7 +113,7 @@ header p {
   width: 100%;
   height: 350px;
   object-fit: cover;
-  filter: grayscale(20%);
+  filter: grayscale(10%);
   transition: all 0.4s ease;
 }
 
@@ -103,13 +131,13 @@ header p {
 .card-title {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #111827;
+  color: #e2e8f0;
   margin-bottom: 10px;
 }
 
 .card-text {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: #cbd5e1;
   line-height: 1.5;
 }
 
@@ -120,7 +148,7 @@ header p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(17, 24, 39, 0.85);
+  background: rgba(3, 7, 18, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,12 +156,12 @@ header p {
 }
 
 .modal-content {
-  background: #ffffff;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
   border-radius: 16px;
   width: 90%;
   max-width: 800px;
   padding: 30px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
   animation: zoomIn 0.4s ease;
 }
 
@@ -141,24 +169,24 @@ header p {
   width: 100%;
   height: 400px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 
 .modal-content h2 {
-  color: #1e3a8a;
+  color: #a5b4fc;
   margin-bottom: 15px;
 }
 
 .modal-content p {
-  color: #374151;
+  color: #e2e8f0;
   line-height: 1.6;
 }
 
 .close-btn {
-  background: #1e3a8a;
+  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
   border: none;
-  color: white;
+  color: #f8fafc;
   padding: 8px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -167,7 +195,7 @@ header p {
 }
 
 .close-btn:hover {
-  background: #111827;
+  background: #0f172a;
 }
 
 /* === Анимация === */

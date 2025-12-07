@@ -1,41 +1,109 @@
-export class Cosmonaut {
-  constructor(
-    public fullname: string,
-    public photo: string,
-    public description: string
-  ) {}
+export interface Habit {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  frequency: string;
+  completed: boolean;
+  lastUpdated: string;
 }
 
-export class Model {
-  cosmonauts: Cosmonaut[];
-
-  constructor() {
-    this.cosmonauts = [
-      new Cosmonaut(
-        'Юрий Алексеевич Гагарин',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Yuri_Gagarin_with_awards.jpg/960px-Yuri_Gagarin_with_awards.jpg',
-        'Первый человек в космосе. 12 апреля 1961 года совершил орбитальный полёт на корабле "Восток-1" и навсегда вписал своё имя в историю освоения космоса.'
-      ),
-      new Cosmonaut(
-        'Валентина Владимировна Терешкова',
-        'https://upload.wikimedia.org/wikipedia/commons/6/61/RIAN_archive_612748_Valentina_Tereshkova.jpg',
-        'Первая женщина-космонавт. В 1963 году совершила полёт на корабле "Восток-6", доказав, что женщина способна выдержать все испытания космического полёта.'
-      ),
-      new Cosmonaut(
-        'Алексей Архипович Леонов',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Alexei_Leonov_%28cropped_2%29.jpg/960px-Alexei_Leonov_%28cropped_2%29.jpg',
-        'Советский космонавт, первым вышедший в открытое космическое пространство в 1965 году. Участвовал в программе "Союз — Аполлон" и внёс огромный вклад в развитие пилотируемых полётов.'
-      ),
-      new Cosmonaut(
-        'Светлана Евгеньевна Савицкая',
-        'https://i.pinimg.com/736x/b7/34/34/b734343a1683d3bf78a1ae21c8ec430d.jpg',
-        'Вторая женщина-космонавт и первая женщина, вышедшая в открытый космос. Работала на станции "Салют-7", проводила эксперименты и отрабатывала операции в скафандре.'
-      ),
-      new Cosmonaut(
-        'Владимир Александрович Джанибеков',
-        'https://api.retrofm.ru/images/YtttmFU47QQ6pBJpgkI5lGaSkKO9LzRw7yhqm9GR_vertical_desktop.webp',
-        'Советский космонавт, совершивший пять полётов и прославившийся мастерством в стыковках и спасательных операциях. Участник исторического возврата станции "Салют-7".'
-      )
-    ];
-  }
+export interface HabitPayload {
+  title: string;
+  description: string;
+  category: string;
+  frequency: string;
 }
+
+export const DEFAULT_HABITS: Habit[] = [
+  {
+    id: 1,
+    title: 'Не сплетничать с коллегами на работе',
+    description: 'Сосредоточьтесь на фактах и поддержании деловой атмосферы, избегая обсуждений людей за их спиной.',
+    category: 'Коммуникации',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    title: 'Сделайте одно действие для завершения задачи',
+    description: 'Выберите конкретное действие, которое продвинет текущую задачу, и выполните его перед переключением на другую.',
+    category: 'Фокус и эффективность',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    title: 'Уборка рабочего места в конце дня',
+    description: 'Освободите стол от лишних предметов и подготовьте пространство к следующему рабочему дню.',
+    category: 'Организация',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 4,
+    title: 'Сделайте несколько деловых звонков',
+    description: 'Запланируйте и выполните важные звонки, связанные с текущими проектами или партнерами.',
+    category: 'Коммуникации',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 5,
+    title: 'Ответьте на деловые письма',
+    description: 'Разберите входящие письма и отправьте ответы по ключевым темам, чтобы не накапливать задолженности.',
+    category: 'Коммуникации',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 6,
+    title: 'Сходите на встречу',
+    description: 'Посетите запланированную встречу, подготовив ключевые вопросы и заметки.',
+    category: 'Взаимодействие',
+    frequency: 'Еженедельно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 7,
+    title: 'Просмотрите свои заметки',
+    description: 'Повторите сделанные записи, обновите статусы задач и зафиксируйте новые идеи.',
+    category: 'Фокус и эффективность',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 8,
+    title: 'Представьте идею на встрече',
+    description: 'Сформулируйте и презентуйте полезную идею для улучшения процессов или продукта.',
+    category: 'Развитие',
+    frequency: 'Еженедельно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 9,
+    title: 'Пять минут на размышления об улучшениях',
+    description: 'Ежедневно выделяйте время на анализ своих процессов и поиска точек роста.',
+    category: 'Развитие',
+    frequency: 'Ежедневно',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+  {
+    id: 10,
+    title: 'Напишите аннотации к обучающим видео',
+    description: 'Создавайте краткие заметки к профильным роликам, фиксируя идеи для практического применения.',
+    category: 'Обучение',
+    frequency: 'После просмотра',
+    completed: false,
+    lastUpdated: new Date().toISOString(),
+  },
+];

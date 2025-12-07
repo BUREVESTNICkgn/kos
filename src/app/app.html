@@ -1,42 +1,185 @@
-<header>
-  <h1>Выдающиеся космонавты России</h1>
-  <p>Первопроходцы космоса</p>
-</header>
-
-<div class="container">
-  <!-- Поиск -->
-  <div class="search-box">
-    <input
-      [(ngModel)]="searchTerm"
-      type="text"
-      placeholder="Введите фамилию космонавта..."
-    />
+<mat-toolbar color="primary" class="main-toolbar">
+  <mat-icon aria-hidden="true">track_changes</mat-icon>
+  <div class="toolbar-text">
+    <span class="title">Трекер рабочих привычек</span>
+    <span class="subtitle">Добавляйте, редактируйте и отмечайте привычки в один клик</span>
   </div>
+  <span class="spacer"></span>
+  <button mat-stroked-button color="accent" (click)="resetToDefaults()" matTooltip="Вернуть примеры привычек">
+    <mat-icon aria-hidden="true">restart_alt</mat-icon>
+    Сбросить примеры
+  </button>
+</mat-toolbar>
 
-  <!-- Галерея -->
-  <div class="gallery">
-    <div
-      class="card"
-      *ngFor="let cosmonaut of filteredCosmonauts"
-      (click)="selectCosmonaut(cosmonaut)"
-    >
-      <img [src]="cosmonaut.photo" alt="{{ cosmonaut.fullname }}" />
-      <div class="card-body">
-        <h5 class="card-title">{{ cosmonaut.fullname }}</h5>
-        <p class="card-text">{{ cosmonaut.description | slice: 0:120 }}...</p>
+<div class="page">
+  <div class="grid">
+    <mat-card class="card stats-card">
+      <div class="eyebrow">Краткий обзор</div>
+      <div class="stats">
+        <div class="stat">
+          <span class="label">Всего привычек</span>
+          <span class="value">{{ habits.length }}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Активные</span>
+          <span class="value">{{ activeCount }}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Выполненные</span>
+          <span class="value">{{ completedCount }}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Прогресс</span>
+          <mat-chip color="primary" selected>{{ completionRate }}%</mat-chip>
+        </div>
       </div>
-    </div>
+    </mat-card>
+
+    <mat-card class="card form-card">
+      <div class="card-header">
+        <div>
+          <div class="eyebrow">Добавление и редактирование</div>
+          <h2 class="card-title">{{ editingHabit ? 'Редактировать привычку' : 'Новая привычка' }}</h2>
+          <p class="muted">Используйте форму, чтобы фиксировать новые привычки или обновлять существующие.</p>
+        </div>
+        <mat-chip color="accent" selected>{{ editingHabit ? 'Режим редактирования' : 'Режим добавления' }}</mat-chip>
+      </div>
+
+      <form class="habit-form" [formGroup]="habitForm" (ngSubmit)="saveHabit()">
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Привычка</mat-label>
+            <input matInput placeholder="Например: Ответить на письма" formControlName="title" />
+            <mat-error *ngIf="habitForm.controls.title.invalid && habitForm.controls.title.touched">
+              Добавьте название (минимум 3 символа)
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Категория</mat-label>
+            <input matInput placeholder="Коммуникации, обучение..." formControlName="category" />
+            <mat-error *ngIf="habitForm.controls.category.invalid && habitForm.controls.category.touched">
+              Минимум 3 символа для категории
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="wide">
+            <mat-label>Описание</mat-label>
+            <textarea matInput rows="3" formControlName="description" placeholder="Что нужно сделать и зачем"></textarea>
+            <mat-error *ngIf="habitForm.controls.description.invalid && habitForm.controls.description.touched">
+              Опишите привычку подробнее (минимум 10 символов)
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Частота</mat-label>
+            <input matInput placeholder="Ежедневно, еженедельно..." formControlName="frequency" />
+          </mat-form-field>
+        </div>
+
+        <div class="actions">
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon aria-hidden="true">{{ editingHabit ? 'save' : 'add' }}</mat-icon>
+            {{ editingHabit ? 'Сохранить изменения' : 'Добавить привычку' }}
+          </button>
+          <button mat-button type="button" (click)="resetForm()">
+            <mat-icon aria-hidden="true">close</mat-icon>
+            Очистить форму
+          </button>
+        </div>
+      </form>
+    </mat-card>
   </div>
 
-  <!-- Модальное окно -->
-  <div *ngIf="selectedCosmonaut" class="modal-overlay" (click)="closeDetails()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <img [src]="selectedCosmonaut.photo" alt="{{ selectedCosmonaut.fullname }}" />
-      <h2>{{ selectedCosmonaut.fullname }}</h2>
-      <p>{{ selectedCosmonaut.description }}</p>
-      <div class="text-center mt-3">
-        <button class="close-btn" (click)="closeDetails()">Закрыть</button>
+  <mat-card class="card list-card">
+    <div class="list-header">
+      <div>
+        <div class="eyebrow">Список привычек</div>
+        <h2 class="card-title">Управление задачами</h2>
+        <p class="muted">Отмечайте выполнение, редактируйте и удаляйте записи. Поиск работает по названию, категории и описанию.</p>
       </div>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Поиск</mat-label>
+        <input matInput placeholder="Введите название или категорию" [formControl]="searchControl" />
+        <button mat-icon-button matSuffix *ngIf="searchControl.value" (click)="searchControl.reset(''); applyFilter();">
+          <mat-icon aria-hidden="true">clear</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
-  </div>
+
+    <mat-divider></mat-divider>
+
+    <ng-container *ngIf="filteredHabits.length; else emptyList">
+      <table mat-table [dataSource]="filteredHabits" class="habit-table" aria-label="Таблица привычек">
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Привычка</th>
+          <td mat-cell *matCellDef="let habit">
+            <div class="cell-title">
+              <div class="title-text">{{ habit.title }}</div>
+              <div class="description">{{ habit.description }}</div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Категория</th>
+          <td mat-cell *matCellDef="let habit">
+            <mat-chip color="accent" selected>{{ habit.category }}</mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="frequency">
+          <th mat-header-cell *matHeaderCellDef>Частота</th>
+          <td mat-cell *matCellDef="let habit">{{ habit.frequency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Статус</th>
+          <td mat-cell *matCellDef="let habit">
+            <mat-slide-toggle
+              color="primary"
+              [checked]="habit.completed"
+              (change)="toggleCompletion(habit)"
+              matTooltip="Отметить выполнение"
+            >
+              {{ habit.completed ? 'Готово' : 'В процессе' }}
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated">
+          <th mat-header-cell *matHeaderCellDef>Обновлено</th>
+          <td mat-cell *matCellDef="let habit">{{ habit.lastUpdated | date: 'd MMM, HH:mm' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="actions-cell">Действия</th>
+          <td mat-cell *matCellDef="let habit" class="actions-cell">
+            <button mat-icon-button color="primary" (click)="startEdit(habit)" matTooltip="Редактировать привычку">
+              <mat-icon aria-hidden="true">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteHabit(habit)" matTooltip="Удалить привычку">
+              <mat-icon aria-hidden="true">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </ng-container>
+
+    <ng-template #emptyList>
+      <div class="empty-state" *ngIf="emptyStateVisible; else startHint">
+        <mat-icon aria-hidden="true">search_off</mat-icon>
+        <p>По запросу ничего не найдено. Попробуйте изменить критерии поиска.</p>
+      </div>
+      <ng-template #startHint>
+        <div class="empty-state">
+          <mat-icon aria-hidden="true">playlist_add</mat-icon>
+          <p>Добавьте первую привычку, чтобы начать отслеживание.</p>
+        </div>
+      </ng-template>
+    </ng-template>
+  </mat-card>
 </div>

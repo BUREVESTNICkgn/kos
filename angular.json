@@ -29,8 +29,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -79,40 +79,23 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
-,
-"cli": {
-  "analytics": "7349cc21-1f91-4e2f-9a41-0d2507747703"
-},
-"cli": {
-  "analytics": "c3c87988-a032-4a4d-a958-e2de9b7d972d"
-},
-"cli": {
-  "analytics": "6813c88f-4061-479e-a803-b3c6599fbee2"
-},
-"cli": {
-  "analytics": "8dfb9b6e-2e0b-4dcb-9f73-8d634383e2fe"
-},
-"cli": {
-  "analytics": "c57f0201-8e83-43b2-a993-5fdbecb86e45"
-},
-"cli": {
-  "analytics": "f4171425-59bf-42e7-ad8d-1d6ebef4ae7c"
-},
-"cli": {
-  "analytics": "14bec5ff-d52c-46bd-a7cd-6fa08f327bb3"
-},
-"cli": {
-  "analytics": "0fc5b397-e37d-4afe-9663-cb46db04e5a5"
-},
-"cli": {
-  "analytics": false
-},
-"cli": {
-  "analytics": "dd8ed22f-bf36-4e32-97f6-11f0a3e00d9e"
-},
-"cli": {
-  "analytics": "e07bc683-1aee-40b7-857a-28c7a6f5d748"
-},
-"cli": {
-  "analytics": "47e64af7-494e-4955-a998-36b370bbab17"
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,6 +1,6 @@
 <header>
-  <h1>Выдающиеся поэты России</h1>
-  <p>Интерактивная галерея великих творцов русского слова</p>
+  <h1>Выдающиеся космонавты России</h1>
+  <p>Интерактивная галерея первопроходцев космоса</p>
 </header>
 
 <div class="container">
@@ -9,7 +9,7 @@
     <input
       [(ngModel)]="searchTerm"
       type="text"
-      placeholder="Введите фамилию поэта..."
+      placeholder="Введите фамилию космонавта..."
     />
   </div>
 
@@ -17,23 +17,23 @@
   <div class="gallery">
     <div
       class="card"
-      *ngFor="let poet of filteredPoets"
-      (click)="selectPoet(poet)"
+      *ngFor="let cosmonaut of filteredCosmonauts"
+      (click)="selectCosmonaut(cosmonaut)"
     >
-      <img [src]="poet.photo" alt="{{ poet.fullname }}" />
+      <img [src]="cosmonaut.photo" alt="{{ cosmonaut.fullname }}" />
       <div class="card-body">
-        <h5 class="card-title">{{ poet.fullname }}</h5>
-        <p class="card-text">{{ poet.description | slice: 0:120 }}...</p>
+        <h5 class="card-title">{{ cosmonaut.fullname }}</h5>
+        <p class="card-text">{{ cosmonaut.description | slice: 0:120 }}...</p>
       </div>
     </div>
   </div>
 
   <!-- Модальное окно -->
-  <div *ngIf="selectedPoet" class="modal-overlay" (click)="closeDetails()">
+  <div *ngIf="selectedCosmonaut" class="modal-overlay" (click)="closeDetails()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <img [src]="selectedPoet.photo" alt="{{ selectedPoet.fullname }}" />
-      <h2>{{ selectedPoet.fullname }}</h2>
-      <p>{{ selectedPoet.description }}</p>
+      <img [src]="selectedCosmonaut.photo" alt="{{ selectedCosmonaut.fullname }}" />
+      <h2>{{ selectedCosmonaut.fullname }}</h2>
+      <p>{{ selectedCosmonaut.description }}</p>
       <div class="text-center mt-3">
         <button class="close-btn" (click)="closeDetails()">Закрыть</button>
       </div>
